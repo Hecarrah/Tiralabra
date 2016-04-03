@@ -10,3 +10,5 @@ Erityisiä epäselvyyksiä ei vielä tässä kohtaa ole ilmennyt, reittialgoritm
 
 Seuraavaksi alan toteuttamaan myös seuraavaa algoritmia ja samalla korvaamaan javan valmiita metodeja uusilla, omilla metodeilla.
 
+Aikaa viikolla tuli käytettyä projektiin yhteensä kaiketi noin 15h.
+

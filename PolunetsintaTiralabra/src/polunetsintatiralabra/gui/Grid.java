@@ -9,7 +9,6 @@ import polunetsintatiralabra.*;
 
 /**
  * Käyttöliittymä reitinhakualgoritmeille.
- *
  * @author Peter
  */
 public class Grid extends JFrame implements MouseListener {
@@ -80,7 +79,6 @@ public class Grid extends JFrame implements MouseListener {
      * shift+mouse3 = aja JPS
      * mouse1 = piirrä seinä
      * mouse2 = tyhjennä ruutu
-     *
      * @param arg0 ruutu jonka päällä hiiri on tapahtuman hetkellä
      */
     public void mouseClicked(MouseEvent arg0) {
@@ -126,13 +124,12 @@ public class Grid extends JFrame implements MouseListener {
             System.out.println("JPS start");
             jps.search();
             System.out.println("JPS end");
-        }
+        }updateLabel(source);
     }
 
     /**
      * jos hiiren vasen eli mouse1 on pohjassa niin piirretään seinää hiiren
      * liikkuessa, jos oikea niin tyhjennetään.
-     *
      * @param arg0 ruutu jonka päällä hiiri on
      */
     public void mouseEntered(MouseEvent arg0) {
@@ -146,25 +143,22 @@ public class Grid extends JFrame implements MouseListener {
                 source.setBackground(Color.white);
                 source.setPass(true);
             }
-        }
+        }updateLabel(source);
     }
     public void mouseExited(MouseEvent arg0) {}
     public void mousePressed(MouseEvent arg0) {}
     public void mouseReleased(MouseEvent arg0) {}
     /**
      * Haetaan tietty node jostain koordinaatista
-     *
      * @param a x koordinaatti
      * @param b y koordinaatti
      * @return palauttaa noden.
      */
     public static Node getLabelAtCoords(int a, int b) {
-        //System.out.println(a+" "+b);
         if(a < 0 || b < 0 || a > size-1 || b > size-1){
             return null;
         }
-        else if (label[a][b].getBackground() == Color.DARK_GRAY || label[a][b].getForeground() == Color.DARK_GRAY) {
-            //System.out.println("seinä");
+        else if (label[a][b].getBackground() == Color.DARK_GRAY) {
             return null;
         }
         return label[a][b];
@@ -172,12 +166,12 @@ public class Grid extends JFrame implements MouseListener {
 
     /**
      * hakee noden koordinaatit
-     *
      * @param l node jonka koodinaatit haetaan
      * @return koordinaatit taulukossa jossa [0] on x koordinaatti ja [1] y
      * koordinaatti.
      */
     public static int[] getLabelCoords(Node l) {
+        updateLabel(l);
         int a = l.getPosX();
         int b = l.getPosY();
         int[] c = new int[2];
@@ -187,12 +181,12 @@ public class Grid extends JFrame implements MouseListener {
     }
     /**
      * haetaan jonkin noden naapurit 8 suunnassa.
-     *
      * @param current node jonka naapurit haetaan
      * @return palautetaan naapurit taulukossa jossa n[0] on ensimmäinen naapuri
      * n[1] toinen .. n[7] viimeinen.
      */
     public static Node[] getNeighbours(Node current) {
+        updateLabel(current);
         Node[] n = new Node[8];
         n[0] = getLabelAtCoords(current.getPosX() - 1, current.getPosY() + 0);
         n[1] = getLabelAtCoords(current.getPosX() + 0, current.getPosY() - 1);
@@ -213,13 +207,27 @@ public class Grid extends JFrame implements MouseListener {
      * @return boolean arvo, onko node mahdollinen paikka.
      */
     public static boolean passable(int x, int y){
+        //updateLabel(getLabelAtCoords(x,y));
         if(getLabelAtCoords(x,y) == null){
             return false;
         }
-        if((getLabelAtCoords(x,y).getBackground() == Color.DARK_GRAY)){
+        else 
+            return (getLabelAtCoords(x,y).getBackground() != Color.DARK_GRAY);
+        }
+    /**
+     * tarkisteaan onko node tietyssä pisteessä vapaa.
+     * tulisi palauttaa false jos node on joko null, tai seinää.
+     * @param a tarkistettava node.
+     * @return boolean arvo, onko node mahdollinen paikka.
+     */
+    public static boolean passable(Node a){
+        updateLabel(a);
+        if(a == null){
             return false;
-        }else{
-         return false;
+        }
+        else{
+            //System.out.println(a.getBackground().toString());
+            return (a.getBackground() != (Color.DARK_GRAY));
         }
     }
 
@@ -251,6 +259,13 @@ public class Grid extends JFrame implements MouseListener {
                     label[i][j].setBackground(Color.white);
                 }
             }
+        }
+    }
+    public static void updateLabel(Node n) {
+        if(n != null){
+        int i = n.getPosX();
+        int j = n.getPosY();
+        label[i][j] = n;
         }
     }
     public static void main(String[] arg) {

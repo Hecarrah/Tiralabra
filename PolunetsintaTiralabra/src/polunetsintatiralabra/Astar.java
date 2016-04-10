@@ -1,7 +1,6 @@
 package polunetsintatiralabra;
 
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.PriorityQueue;
 import polunetsintatiralabra.gui.Grid;
 import polunetsintatiralabra.gui.Node;
@@ -16,7 +15,7 @@ public class Astar {
     private PriorityQueue<Node> frontier = new PriorityQueue<Node>();
     private Map<Node, Integer> cost_so_far = new Map<Node, Integer>();
     private boolean[][] visited = new boolean[128][128];
-    private Map<Node,Node> came_from = new Map<Node,Node>();
+    private Map<Node, Node> came_from = new Map<Node, Node>();
 
     /**
      * Run metodi ajaa itse algoritmin. Aluksi tyhjennetään vanhan algoritmin
@@ -35,23 +34,18 @@ public class Astar {
         while (!frontier.isEmpty()) {
             Node current = frontier.poll();
             cost_so_far.put(current, 1);
-
             if (current == Grid.getEnd() || current == null) { //Algoritmi on suoritettu loppuun
                 return true;
             }
-
             Node[] Neighbours = Grid.getNeighbours(current);
             for (Node next : Neighbours) {
                 if (next != null) {
-                    cost_so_far.put(next, 1);
-                    int new_cost = (int)cost_so_far.get(current) + 1;
-                    if (visited[next.getPosX()][next.getPosY()] == false || new_cost < (int)cost_so_far.get(next)) {
+                    //cost_so_far.put(next, 1);
+                    int new_cost = (int) cost_so_far.get(current) + 1;
+                    if (visited[next.getPosX()][next.getPosY()] == false || new_cost < (int) cost_so_far.get(next)) {
                         visited[next.getPosX()][next.getPosY()] = true; //merkitään paikka käydyksi
 
-                        if (next == Grid.getEnd()) { //Algoritmi on suoritettu loppuun, maali löydetty
-                            came_from.put(next, current);
-                            drawPath(next); //piirretään itse polku
-                            System.out.println("done");
+                        if (isEnd(next, current)) { //Algoritmi on suoritettu loppuun, maali löydetty
                             return true;
                         }
                         cost_so_far.put(next, new_cost);
@@ -68,10 +62,26 @@ public class Astar {
         }
         return false;
     }
- /**
-  * Väritetääb käydyt nodet.
-  * @param next väritettävä node.
-  */
+    /**
+     * Tarkistetaan onko node maalipiste.
+     * Jos on maalipiste niin piirretään reitti takaisin alkuun.
+     * @param node tarkistettava node.
+     * @param current Nykyinen node.
+     * @return boolean, tosi jos on loppupiste, false muuten.
+     */
+    public boolean isEnd(Node node, Node current) {
+        if (node == Grid.getEnd()) { //Algoritmi on suoritettu loppuun, maali löydetty
+            came_from.put(node, current);
+            drawPath(node); //piirretään itse polku
+            System.out.println("done");
+            return true;
+        }else return false;
+    }
+
+    /**
+     * Väritetääb käydyt nodet.
+     * @param next väritettävä node.
+     */
     public void colorNodes(Node next) {
         smallest = Math.min(smallest, next.getPriority());  // Maalataan kaikki käydyt nodet
         float[] hsb = Color.RGBtoHSB(100, 100, color, null);
@@ -81,7 +91,6 @@ public class Astar {
 
     /**
      * Piirretään polku taaksepäin maalista alkuun.
-     *
      * @param next node mistä aloitetaan.
      */
     public void drawPath(Node next) {
@@ -89,15 +98,15 @@ public class Astar {
             if (next != Grid.getEnd()) {
                 next.setBackground(Color.pink);
             }
-            next = (Node)came_from.get(next);
-
+            if((Node)came_from.get(next) == null){
+                break;
+            }
+            next = (Node) came_from.get(next);
         }
     }
 
     /**
-     * distance metodi kertoo pituuden kahden noden välillä, tässä algoritmissa
-     * sitä käytetään kun lasketaan mikä node on lähinpänä maalia.
-     *
+     * distance metodi kertoo pituuden kahden noden välillä.
      * @param a kohde node
      * @param b node josta halutaan kohteeseen.
      * @return matka sijainnista kohteeseen

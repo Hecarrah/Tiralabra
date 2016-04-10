@@ -1,5 +1,6 @@
 package poulunetsintatiralabra;
 
+import java.awt.Color;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import polunetsintatiralabra.Astar;
@@ -14,6 +15,37 @@ public class AstarTest {
     public void runTest(){
         if(as.run()){
             assertTrue("Ohjelma ei suorittanut oikein", true);
+        }
+    }
+    @Test
+    public void isEndTest(){
+        Node n = new Node();
+        Node n2 = new Node();
+        n = Grid.getEnd();
+        if(as.isEnd(n, n2)){
+            assertTrue("isEnd ei toiminut oikein", true);
+        }
+    }
+    @Test
+    public void colorNodesTest(){
+        Node n = new Node();
+        n.setPosX(1);
+        n.setPosY(1);
+        n.setBackground(Color.WHITE);
+        as.colorNodes(n);
+        if(n.getBackground() != Color.WHITE){
+            assertTrue("ColorNodes ei toiminut oikein.", true);
+        }
+    }
+    @Test
+    public void drawPathTest(){
+        Node n = new Node();
+        n.setPosX(1);
+        n.setPosY(1);
+        n.setBackground(Color.WHITE);
+        as.drawPath(n);
+        if(n.getBackground() != Color.pink){
+            assertTrue("drawPath ei värittänyt oikein.", true);
         }
     }
     @Test

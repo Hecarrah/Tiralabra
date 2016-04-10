@@ -1,5 +1,6 @@
 package polunetsintatiralabra.gui;
 
+import java.awt.Color;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import polunetsintatiralabra.Astar;
@@ -46,6 +47,42 @@ public class GridTest {
         
                 if(g.getNeighbours(a)[0] == null && g.getNeighbours(a)[7] != null && g.getNeighbours(a)[2] == null){
             assertTrue("naapurit väärin", true);
+        }
+    }
+    @Test
+    public void getPassableTest(){
+        if(Grid.passable(-1, -1)){
+            assertTrue("passable toimii väärin", false);
+        }
+    }
+    @Test
+    public void getPassableTest2(){
+        Node a = new Node();
+        a.setPosX(10);
+        a.setPosY(10);
+        if(Grid.passable(a.getPosX(), a.getPosY())){
+            assertTrue("passable toimii väärin", true);
+        }
+    }
+    @Test
+    public void getPassableTest3(){
+        Node a = new Node();
+        a.setPosX(10);
+        a.setPosY(10);
+        a.setBackground(Color.DARK_GRAY);
+        if(Grid.passable(a)){
+            assertTrue("passable toimii väärin", false);
+        }
+    }
+    @Test
+    public void getPassableTest4(){
+        Node a = new Node();
+        a.setPosX(10);
+        a.setPosY(10);
+        a.setBackground(Color.DARK_GRAY);
+        Grid.updateLabel(a);
+        if(Grid.passable(a.getPosX(),a.getPosY())){
+            assertTrue("passable toimii väärin", false);
         }
     }
 }

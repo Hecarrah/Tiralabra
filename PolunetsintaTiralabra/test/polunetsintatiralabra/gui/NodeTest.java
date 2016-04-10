@@ -3,8 +3,6 @@ package polunetsintatiralabra.gui;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import polunetsintatiralabra.Astar;
-import polunetsintatiralabra.gui.Grid;
-import polunetsintatiralabra.gui.Node;
 
 public class NodeTest {
         Astar as = new Astar();

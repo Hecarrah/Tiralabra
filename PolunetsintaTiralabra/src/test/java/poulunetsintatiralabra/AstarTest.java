@@ -13,10 +13,28 @@ public class AstarTest {
         
     @Test
     public void runTest(){
-        if(as.run()){
+        if(as.run() == true){
             assertTrue("Ohjelma ei suorittanut oikein", true);
         }
     }
+    @Test
+    public void runTest2(){
+        Grid.setStart(Grid.getEnd());
+        if(as.run() == true){
+            assertTrue("Ohjelma ei suorittanut oikein", true);
+        }
+    }
+    @Test
+    public void runTest3(){
+        Node n = new Node();
+        Node n2 = new Node();
+        n = g.getStart();
+        n.setPosX(10);
+        n2.setPosY(19);
+        if(as.run() == true){
+            assertTrue("Ohjelma ei suorittanut oikein", true);
+        }
+    }  
     @Test
     public void isEndTest(){
         Node n = new Node();
@@ -24,17 +42,6 @@ public class AstarTest {
         n = Grid.getEnd();
         if(as.isEnd(n, n2)){
             assertTrue("isEnd ei toiminut oikein", true);
-        }
-    }
-    @Test
-    public void runTest2(){
-        Node n = new Node();
-        Node n2 = new Node();
-        n = g.getStart();
-        n.setPosX(10);
-        n2.setPosY(19);
-        if(as.run()){
-            assertTrue("Ohjelma ei suorittanut oikein", true);
         }
     }
     @Test

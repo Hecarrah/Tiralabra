@@ -13,8 +13,8 @@ public class Grid extends JFrame implements MouseListener {
 
     private static Node[][] label;
     private static int size = 32;
-    boolean startSet = false;
-    boolean endSet = false;
+    private static boolean startSet = false;
+    private static boolean endSet = false;
     private static Node startLabel;
     private static Node endLabel;
 
@@ -38,14 +38,10 @@ public class Grid extends JFrame implements MouseListener {
                     label[i][j].setBackground(Color.DARK_GRAY);
                 }
                 if (i == 1 && j == 1) {
-                    label[i][j].setBackground(Color.green);
-                    startLabel = label[i][j];
-                    startSet = true;
+                    setStart(label[i][j]);
                 }
                 if (i == 30 && j == 30) {
-                    label[i][j].setBackground(Color.red);
-                    endLabel = label[i][j];
-                    endSet = true;
+                    setEnd(label[i][j]);
                 }
             }
         }
@@ -244,6 +240,22 @@ public class Grid extends JFrame implements MouseListener {
      */
     public static Node getEnd() {
         return endLabel;
+    }
+    public static void setEnd(Node n) {
+        if(n == null){
+        }else{
+        n.setBackground(Color.red);
+        endLabel = n;
+        endSet = true;
+        }
+    }
+    public static void setStart(Node n) {
+        if(n == null){
+        }else{
+        n.setBackground(Color.green);
+        startLabel = n;
+        startSet = true;
+        }
     }
     /**
      * tyhjentää taululta kaiken paitsi seinät ja maalipisteet.

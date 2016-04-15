@@ -32,8 +32,11 @@ public class Astar {
         Grid.flush();
         frontier.add(Grid.getStart());
 
-        while (!frontier.isEmpty()) {
+        while (Grid.getEnd() != null && Grid.getStart() != null && !frontier.isEmpty()) {
             Node current = frontier.poll();
+            if(current == null){
+                return false;
+            }
             cost_so_far.put(current, 1);
             if (current == Grid.getEnd()) { //Algoritmi on suoritettu loppuun
                 return true;
@@ -41,7 +44,6 @@ public class Astar {
             Node[] Neighbours = Grid.getNeighbours(current);
             for (Node next : Neighbours) {
                 if (next != null) {
-                    //cost_so_far.put(next, 1);
                     int new_cost = (int) cost_so_far.get(current) + 1;
                     if (visited[next.getPosX()][next.getPosY()] == false || new_cost < (int) cost_so_far.get(next)) {
                         visited[next.getPosX()][next.getPosY()] = true; //merkitään paikka käydyksi
@@ -57,12 +59,10 @@ public class Astar {
 
                         Grid.colorNodes(next); //maalataan nodet.
                     }
+                    }
                 }
-            }
-
+            } return false;
         }
-        return false;
-    }
     /**
      * Tarkistetaan onko node maalipiste.
      * Jos on maalipiste niin piirretään reitti takaisin alkuun.

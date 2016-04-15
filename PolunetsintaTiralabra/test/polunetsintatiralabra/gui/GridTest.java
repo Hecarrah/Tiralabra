@@ -4,8 +4,6 @@ import java.awt.Color;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import polunetsintatiralabra.Astar;
-import polunetsintatiralabra.gui.Grid;
-import polunetsintatiralabra.gui.Node;
 
 public class GridTest {
         Astar as = new Astar();
@@ -83,6 +81,36 @@ public class GridTest {
         Grid.updateLabel(a);
         if(Grid.passable(a.getPosX(),a.getPosY())){
             assertTrue("passable toimii väärin", false);
+        }
+    }
+        @Test
+    public void colorNodesTest(){
+        Node a = new Node();
+        Grid.colorNodes(a);
+        if(a.getBackground() == Color.LIGHT_GRAY){
+            assertTrue("colorNodes ei toiminut oikein", true);
+        }
+    }
+        @Test
+    public void colorNodesTest2(){
+        Node n = new Node();
+        n.setPosX(1);
+        n.setPosY(1);
+        n.setBackground(Color.WHITE);
+        Grid.colorNodes(n);
+        if(n.getBackground() != Color.WHITE){
+            assertTrue("ColorNodes ei toiminut oikein.", true);
+        }
+    }
+    @Test
+    public void drawPathTest(){
+        Node n = new Node();
+        n.setPosX(1);
+        n.setPosY(1);
+        n.setBackground(Color.WHITE);
+        Grid.drawPath(n);
+        if(n.getBackground() != Color.pink){
+            assertTrue("drawPath ei värittänyt oikein.", true);
         }
     }
 }

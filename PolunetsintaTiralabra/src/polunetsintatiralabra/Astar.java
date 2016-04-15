@@ -1,6 +1,7 @@
 package polunetsintatiralabra;
 
-import java.awt.Color;
+import polunetsintatiralabra.dataStructures.Map;
+import polunetsintatiralabra.dataStructures.Queue;
 import java.util.PriorityQueue;
 import polunetsintatiralabra.gui.Grid;
 import polunetsintatiralabra.gui.Node;
@@ -12,10 +13,10 @@ public class Astar {
 
     private int smallest = Integer.MAX_VALUE;
     private int color = 255;
-    private PriorityQueue<Node> frontier = new PriorityQueue<Node>();
+    //private PriorityQueue<Node> frontier = new PriorityQueue<Node>();
+    private Queue<Node> frontier = new Queue<Node>();
     private Map<Node, Integer> cost_so_far = new Map<Node, Integer>();
     private boolean[][] visited = new boolean[128][128];
-    private Map<Node, Node> came_from = new Map<Node, Node>();
 
     /**
      * Run metodi ajaa itse algoritmin. Aluksi tyhjennetään vanhan algoritmin
@@ -34,7 +35,7 @@ public class Astar {
         while (!frontier.isEmpty()) {
             Node current = frontier.poll();
             cost_so_far.put(current, 1);
-            if (current == Grid.getEnd() || current == null) { //Algoritmi on suoritettu loppuun
+            if (current == Grid.getEnd()) { //Algoritmi on suoritettu loppuun
                 return true;
             }
             Node[] Neighbours = Grid.getNeighbours(current);
@@ -52,9 +53,9 @@ public class Astar {
                         int priority = new_cost + distance(Grid.getEnd(), next); //annetaan tärkeys sen perusteela kuinka lähellä on maalia.
                         next.setPriority(priority);
                         frontier.add(next);
-                        came_from.put(next, current);
+                        next.parent = current;
 
-                        colorNodes(next); //maalataan nodet.
+                        Grid.colorNodes(next); //maalataan nodet.
                     }
                 }
             }
@@ -71,40 +72,12 @@ public class Astar {
      */
     public boolean isEnd(Node node, Node current) {
         if (node == Grid.getEnd()) { //Algoritmi on suoritettu loppuun, maali löydetty
-            came_from.put(node, current);
-            drawPath(node); //piirretään itse polku
+            node.parent = current;
+            Grid.drawPath(node); //piirretään itse polku
             System.out.println("done");
             return true;
         }else return false;
     }
-
-    /**
-     * Väritetääb käydyt nodet.
-     * @param next väritettävä node.
-     */
-    public void colorNodes(Node next) {
-        smallest = Math.min(smallest, next.getPriority());  // Maalataan kaikki käydyt nodet
-        float[] hsb = Color.RGBtoHSB(100, 100, color, null);
-        next.setBackground(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
-        color = color - 1;
-    }
-
-    /**
-     * Piirretään polku taaksepäin maalista alkuun.
-     * @param next node mistä aloitetaan.
-     */
-    public void drawPath(Node next) {
-        while (next != Grid.getStart()) { //maalataan itse polku käytyjen nodejen päälle
-            if (next != Grid.getEnd()) {
-                next.setBackground(Color.pink);
-            }
-            if((Node)came_from.get(next) == null){
-                break;
-            }
-            next = (Node) came_from.get(next);
-        }
-    }
-
     /**
      * distance metodi kertoo pituuden kahden noden välillä.
      * @param a kohde node

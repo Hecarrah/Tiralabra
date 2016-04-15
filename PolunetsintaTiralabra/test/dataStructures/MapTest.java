@@ -1,8 +1,8 @@
-package poulunetsintatiralabra;
+package dataStructures;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import polunetsintatiralabra.Map;
+import polunetsintatiralabra.dataStructures.Map;
 import polunetsintatiralabra.gui.Node;
 
 public class MapTest {

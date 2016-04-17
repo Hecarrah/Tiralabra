@@ -8,6 +8,6 @@ Testejä olen viilannut melko paljon ja tein myös käyttöliittymälle Robot te
 JumpPointSearchin sain toimimaan jokseenkin, ainakin löytää nyt maalin paikoista joista ei viime viikolla vielä osannut hakea.
 Omien metodien toteutusta on jatkettu ja Map olio on toteutettu hash-tyyliseksi, joten sen pitäisi toimia vakioajassa, lukuunottamatta itse hash-koodin muodostamista, jossa ei yleisesti ottaen kuuluisi mennä paljoa mitään aikaa vaikka toimiikin lineaarisesti. Omista luokista on toteutettu myös Queue korvaamaan javan PriorityQueue olion. Queue olio tuntuu toimivn melko hyvin. Astar algoritmin ajaminen paljastaa kuitenkin aina silloin tällöin ongelman queue:n "priority" osuuden toiminnallisuudessa, mutta ydintoiminta toimii kuitenkin niinkuin sen tuleekin.
 
-Seuraavalla viikolla aion jatkaa Queue metodin viilaamista sekä toteuttaa vielä kattavempaa testausta ohjelmistolle. Erityisesti empiirisellä tasolla, ja miksei myös JUnit testeillä. Seuraavalla viikolla jatkan myös toteutus- ja testausdokumentin laatista.
+Seuraavalla viikolla aion jatkaa Queue metodin viilaamista sekä toteuttaa vielä kattavempaa testausta ohjelmistolle. Erityisesti empiirisellä tasolla, ja miksei myös JUnit testeillä. Seuraavalla viikolla jatkan myös toteutus- ja testausdokumentin laatimista.
 
 Viikolla käytetty aikaa noin 20h

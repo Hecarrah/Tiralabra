@@ -1,4 +1,4 @@
-package polunetsintatiralabra;
+package polunetsintatiralabra.algorithms;
 
 import polunetsintatiralabra.dataStructures.Map;
 import polunetsintatiralabra.dataStructures.Queue;
@@ -39,6 +39,7 @@ public class Astar {
             }
             cost_so_far.put(current, 1);
             if (current == Grid.getEnd()) { //Algoritmi on suoritettu loppuun
+                System.out.println("Path found");
                 return true;
             }
             Node[] Neighbours = Grid.getNeighbours(current);
@@ -87,6 +88,7 @@ public class Astar {
     public int distance(Node a, Node b) {
         int dx = Math.abs(b.getPosX() - a.getPosX());
         int dy = Math.abs(b.getPosY() - a.getPosY());
-        return Math.abs(dx + dy);
+        int r = (dx+dy);
+        return r;
     }
 }

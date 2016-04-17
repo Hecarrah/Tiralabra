@@ -1,10 +1,17 @@
 package polunetsintatiralabra.dataStructures;
-
 import polunetsintatiralabra.gui.Node;
 
+/**
+ * Queue olio jonka idea on korvata Javan PriorityQueue projektissa.
+ * @author Peter
+ * @param <E> Olion tyyppi.
+ */
 public class Queue<E> {
     Node[] table = new Node[32*32];
-    
+    /**
+     * Tarkistetaan onko jono tyhjä.
+     * @return totuusarvo tyhjyydestä.
+     */
 public boolean isEmpty(){
     for(Node test : table){
         if(test != null){
@@ -12,6 +19,11 @@ public boolean isEmpty(){
         }
     }return true;
 }
+/**
+ * Lisätään arvo jonoon.
+ * @param o Lisättävä node
+ * @return totuusarvo metodin suorituksesta
+ */
 public boolean add(Node o){
     int index = 0;
     for(Node test : table){
@@ -22,7 +34,11 @@ public boolean add(Node o){
             index++;
         }
     }return true;
-}
+} /**
+ * Haetaan arvo jonosta sen tärkeyden perusteella.
+ * Verrataan nodejen priority arvoja, ja palautetaan se jolla on paras (pienin) arvo.
+ * @return palautettava node.
+ */
 public Node poll(){
     int min = Integer.MAX_VALUE;
     Node minNode = table[0];

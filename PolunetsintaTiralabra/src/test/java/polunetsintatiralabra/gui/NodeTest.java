@@ -2,7 +2,7 @@ package polunetsintatiralabra.gui;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import polunetsintatiralabra.Astar;
+import polunetsintatiralabra.algorithms.Astar;
 
 public class NodeTest {
         Astar as = new Astar();

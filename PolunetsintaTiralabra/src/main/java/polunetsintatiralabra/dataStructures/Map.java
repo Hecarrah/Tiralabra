@@ -7,23 +7,29 @@ package polunetsintatiralabra.dataStructures;
   */
 public class Map<K, V> {
 
-    private Object[] key = new Object[1000000];
-    private Object[] value = new Object[1000000];
-    int index = 0; //index määrittää mihin indeksiin arvot sijoitetaan
+    private Object[] key = new Object[100000];
+    private Object[] value = new Object[100000];
+    //int index = 0; //index määrittää mihin indeksiin arvot sijoitetaan
 
     /**
      * contains metodi tarkistaa sisältääkö olio jo jonkin tietyn arvon.
      * @param haku haettava olio.
      * @return palauttaa indeksin jos löytyi, muuten -1.
      */
-    public int contains(Object haku) {
-        for (int i = 0; i < index; i++) {
-            if (key[i] == haku) { //jos arvo löytyy niin palautetaan sen indeksi.
-                return i;
-            }
-        }
-        return -1; //muuten -1
-    }
+//    public int contains(Object haku) {
+//        for (int i = 0; i < index; i++) {
+//            if (key[i] == haku) { //jos arvo löytyy niin palautetaan sen indeksi.
+//                return i;
+//            }
+//        }
+//        return -1; //muuten -1
+//    }
+    
+    /**
+     * Generoidaan hashcode oliolle
+     * @param o olio jolle generoidaan
+     * @return palautettava hashcode
+     */
     public int hashC(Object o){
         int hash = 0;
         char[] c = o.toString().toCharArray();
@@ -56,7 +62,7 @@ public class Map<K, V> {
         } else {
             this.key[hashC(a)] = a;
             this.value[hashC(a)] = b;
-            index++; //kasvatetaan indeksinumeroa seuraavalle arvolle.
+            //index++; //kasvatetaan indeksinumeroa seuraavalle arvolle.
         }return true;
     }
 }

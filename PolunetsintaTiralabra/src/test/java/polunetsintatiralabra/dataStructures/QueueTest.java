@@ -1,8 +1,7 @@
-package dataStructures;
+package polunetsintatiralabra.dataStructures;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import polunetsintatiralabra.dataStructures.*;
 import polunetsintatiralabra.gui.Node;
 
 public class QueueTest {

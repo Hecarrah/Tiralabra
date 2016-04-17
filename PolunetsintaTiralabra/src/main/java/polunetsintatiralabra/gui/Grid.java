@@ -1,20 +1,17 @@
 package polunetsintatiralabra.gui;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import polunetsintatiralabra.*;
+
 /**
  * Käyttöliittymä reitinhakualgoritmeille.
  *
  * @author Peter
  */
-public class Grid extends JFrame implements MouseListener {
+public class Grid extends JFrame {
 
     private static Node[][] label;
-    private static int size = 32;
-    private static boolean startSet = false;
-    private static boolean endSet = false;
+    private static final int size = 32;
     private static Node startLabel;
     private static Node endLabel;
 
@@ -38,15 +35,18 @@ public class Grid extends JFrame implements MouseListener {
                     label[i][j].setBackground(Color.DARK_GRAY);
                 }
                 if (i == 1 && j == 1) {
+                    startLabel = label[i][j];
                     setStart(label[i][j]);
                 }
                 if (i == 30 && j == 30) {
+                    endLabel = label[i][j];
                     setEnd(label[i][j]);
                 }
             }
         }
         this.add(panel, BorderLayout.CENTER);
     }
+
     /**
      * initialisointi metodi nodeille.
      *
@@ -59,88 +59,12 @@ public class Grid extends JFrame implements MouseListener {
         n.setOpaque(true);
         n.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
         n.setBackground(Color.WHITE);
-        n.addMouseListener(this);
+        n.addMouseListener(new Mouse());
         n.setPosX(x);
         n.setPosY(y);
         return n;
     }
-    @Override
-    /**
-     * ctrl+mouse1 = alkupaikka ctrl+mouse3 = maali shift+mouse1 = aja astar
-     * shift+mouse3 = aja JPS mouse1 = piirrä seinä mouse2 = tyhjennä ruutu
-     *
-     * @param arg0 ruutu jonka päällä hiiri on tapahtuman hetkellä
-     */
-    public void mouseClicked(MouseEvent arg0) {
-        Node source = (Node) arg0.getSource();
-        if (!(source.getBackground().equals(Color.DARK_GRAY))) {
-            if (arg0.getModifiers() == MouseEvent.BUTTON1_MASK + MouseEvent.CTRL_MASK) {
-                if (startSet) {
-                    startLabel.setBackground(Color.white);
-                    startLabel = source;
-                }
-                source.setBackground(Color.green);
-                startLabel = source;
-                startSet = true;
-            }
-            if (arg0.getModifiers() == MouseEvent.BUTTON3_MASK + MouseEvent.CTRL_MASK) {
-                if (endSet) {
-                    endLabel.setBackground(Color.white);
-                    endLabel = source;
-                }
-                source.setBackground(Color.red);
-                endLabel = source;
-                endSet = true;
-            } else if (arg0.getModifiers() == MouseEvent.BUTTON1_MASK) {
-                source.setBackground(Color.DARK_GRAY);
-                source.setPass(false);
-                int[] t = getLabelCoords(source);
-                System.out.println("x: " + t[0] + " y: " + t[1]);
-            }
-        } else if (arg0.getModifiers() == MouseEvent.BUTTON3_MASK) {
-            source.setBackground(Color.white);
-            source.setPass(true);
-        }
-        if (arg0.getModifiers() == MouseEvent.BUTTON1_MASK + MouseEvent.SHIFT_MASK) {
-            Astar as = new Astar();
-            System.out.println("Astar start");
-            as.run();
-            System.out.println("Astar end");
-        }
-        if (arg0.getModifiers() == MouseEvent.BUTTON3_MASK + MouseEvent.SHIFT_MASK) {
-            JumpPointSearch jps = new JumpPointSearch();
-            System.out.println("JPS start");
-            jps.search();
-            System.out.println("JPS end");
-        }
-        updateLabel(source);
-    }
-    /**
-     * jos hiiren vasen eli mouse1 on pohjassa niin piirretään seinää hiiren
-     * liikkuessa, jos oikea niin tyhjennetään.
-     *
-     * @param arg0 ruutu jonka päällä hiiri on
-     */
-    public void mouseEntered(MouseEvent arg0) {
-        Node source = (Node) arg0.getSource();
-        if (!(source.getBackground().equals(Color.red)) && !(source.getBackground().equals(Color.green))) {
-            if (arg0.getModifiersEx() == MouseEvent.getMaskForButton((MouseEvent.BUTTON1))) {
-                source.setBackground(Color.DARK_GRAY);
-                source.setPass(false);
-            }
-            if (arg0.getModifiersEx() == MouseEvent.getMaskForButton((MouseEvent.BUTTON3))) {
-                source.setBackground(Color.white);
-                source.setPass(true);
-            }
-        }
-        updateLabel(source);
-    }
-    public void mouseExited(MouseEvent arg0) {
-    }
-    public void mousePressed(MouseEvent arg0) {
-    }
-    public void mouseReleased(MouseEvent arg0) {
-    }
+
     /**
      * Haetaan tietty node jostain koordinaatista
      *
@@ -156,6 +80,7 @@ public class Grid extends JFrame implements MouseListener {
         }
         return label[a][b];
     }
+
     /**
      * hakee noden koordinaatit
      *
@@ -172,6 +97,7 @@ public class Grid extends JFrame implements MouseListener {
         c[1] = b;
         return c;
     }
+
     /**
      * haetaan jonkin noden naapurit 8 suunnassa.
      *
@@ -193,6 +119,7 @@ public class Grid extends JFrame implements MouseListener {
         n[7] = getLabelAtCoords(current.getPosX() + 1, current.getPosY() + 1);
         return n;
     }
+
     /**
      * tarkisteaan onko node tietyssä pisteessä vapaa. tulisi palauttaa false
      * jos node on joko null, tai seinää.
@@ -209,6 +136,7 @@ public class Grid extends JFrame implements MouseListener {
             return (getLabelAtCoords(x, y).getBackground() != Color.DARK_GRAY);
         }
     }
+
     /**
      * tarkisteaan onko node tietyssä pisteessä vapaa. tulisi palauttaa false
      * jos node on joko null, tai seinää.
@@ -225,6 +153,7 @@ public class Grid extends JFrame implements MouseListener {
             return (a.getBackground() != (Color.DARK_GRAY));
         }
     }
+
     /**
      * haetaan alkupiste
      *
@@ -233,6 +162,7 @@ public class Grid extends JFrame implements MouseListener {
     public static Node getStart() {
         return startLabel;
     }
+
     /**
      * haetaan loppupiste
      *
@@ -241,22 +171,37 @@ public class Grid extends JFrame implements MouseListener {
     public static Node getEnd() {
         return endLabel;
     }
+
+    /**
+     * Asettaa loppupaikan tietyksi nodeksi.
+     *
+     * @param n node joka asetetaan loppupaikaksi.
+     */
     public static void setEnd(Node n) {
-        if(n == null){
-        }else{
-        n.setBackground(Color.red);
-        endLabel = n;
-        endSet = true;
+        if (n == null) {
+        } else {
+            endLabel.setBackground(Color.white);
+            n.setBackground(Color.red);
+            endLabel = n;
+            //endSet = true;
         }
     }
+
+    /**
+     * Asettaa aloituspaikan tietyksi nodeksi.
+     *
+     * @param n node joka asetetaan aloituspaikaksi
+     */
     public static void setStart(Node n) {
-        if(n == null){
-        }else{
-        n.setBackground(Color.green);
-        startLabel = n;
-        startSet = true;
+        if (n == null) {
+        } else {
+            startLabel.setBackground(Color.white);
+            n.setBackground(Color.green);
+            startLabel = n;
+            //startSet = true;
         }
     }
+
     /**
      * tyhjentää taululta kaiken paitsi seinät ja maalipisteet.
      */
@@ -272,6 +217,7 @@ public class Grid extends JFrame implements MouseListener {
             }
         }
     }
+
     /**
      * piirretään polku maalista alkuun
      *
@@ -287,7 +233,7 @@ public class Grid extends JFrame implements MouseListener {
             } else {
                 next.setBackground(Color.pink);
                 next = next.parent;
-            } 
+            }
         }
     }
 
@@ -301,10 +247,12 @@ public class Grid extends JFrame implements MouseListener {
             next.setBackground(Color.gray);
         }
     }
- /**
-  * Synkronoidaan labelin arvo varmuuden varalta.
-  * @param n 
-  */
+
+    /**
+     * Synkronoidaan labelin arvo varmuuden varalta.
+     *
+     * @param n
+     */
     public static void updateLabel(Node n) {
         if (n != null) {
             int i = n.getPosX();
@@ -312,6 +260,7 @@ public class Grid extends JFrame implements MouseListener {
             label[i][j] = n;
         }
     }
+
     public static void main(String[] arg) {
         Grid cb = new Grid();
         cb.setSize(512, 512);

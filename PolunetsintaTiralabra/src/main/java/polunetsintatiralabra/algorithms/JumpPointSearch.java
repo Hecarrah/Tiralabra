@@ -1,4 +1,4 @@
-package polunetsintatiralabra;
+package polunetsintatiralabra.algorithms;
 
 import polunetsintatiralabra.dataStructures.Queue;
 import polunetsintatiralabra.gui.Grid;
@@ -71,7 +71,7 @@ public class JumpPointSearch {
      * @param cur node josta lähdetään
      * @return kaikki nodet joihin hypättiin
      */
-    private Node[] identifySuccessors(Node cur) {
+    public Node[] identifySuccessors(Node cur) {
         successors = new Node[8];
         neighbors = pruneNeighbors(cur);
         if (neighbors == null) { //jos naapureita ei ole niin palautetaan null
@@ -105,7 +105,7 @@ public class JumpPointSearch {
      * @param node node jonka naapurit haetaan
      * @return node[] joka sisältää kaikki nodet joihin tulisi hypätä.
      */
-    private Node[] pruneNeighbors(Node node) {
+    public Node[] pruneNeighbors(Node node) {
         Grid.updateLabel(node);
         Node parent;
         if (node == null) { //jos node on null niin ei haeta yhtään mitään
@@ -180,7 +180,7 @@ public class JumpPointSearch {
      * @param py Vanhemman y koordinaatti
      * @return node johon hypättiin, tai null jos ei löytynyt sopivaa
      */
-    private Node jump(int x, int y, int px, int py) {
+    public Node jump(int x, int y, int px, int py) {
         Node jx = null;
         Node jy = null;
         Node node = Grid.getLabelAtCoords(x, y);
@@ -201,7 +201,7 @@ public class JumpPointSearch {
             //jälkimmäisten nodejen tulisi olla !(false) eli true kun kyseessä on seinä, mutta jostain syystä ei tässä kohtaa tunnisteta seinäksi tai muuten vaan temppuilee koska antaa jatkuvasti kaikilla arvoilla !(true) eli falsen jolloin ei päästä koskaan pakottamaan naapuria.
             if ((Grid.passable((x - dx), (y + dy)) && !(Grid.passable((x + dx), y))) //syystä tai toisesta ei melkein koskaan saa arvoa true, vaikka pitäisi
                     || (Grid.passable((x + dx), (y - dy)) && !(Grid.passable(x, (y - dy))))) { //ja siten algoritmi ei useasti löydä maalia jos on jonkin seinän takana, ja tarpeeksi lähellä sitä.
-                System.out.println("forced");
+                //System.out.println("forced");//15.4 toimii jotenkuten nyt.
                 return node;
             }
         } else //horizontal / vertical

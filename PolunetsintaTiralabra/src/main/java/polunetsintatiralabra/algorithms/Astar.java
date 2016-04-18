@@ -2,7 +2,7 @@ package polunetsintatiralabra.algorithms;
 
 import polunetsintatiralabra.dataStructures.Map;
 import polunetsintatiralabra.dataStructures.Queue;
-import java.util.PriorityQueue;
+//import java.util.PriorityQueue;
 import polunetsintatiralabra.gui.Grid;
 import polunetsintatiralabra.gui.Node;
 

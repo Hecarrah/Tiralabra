@@ -272,7 +272,7 @@ public class JumpPointSearch {
             }
         }
         if (Grid.passable(x + dx, y) || Grid.passable(x, y + dy)) { //tarkistetaan että sivu ja pysty suunnassa pääsee liikkumaan
-            return jump(x + dx, y + dy, x, y);  //tässä jostain syystä aina välillä tulee stack overflowia, meneekö rekursio liian korkeaksi tai jotain?
+            return jump(x + dx, y + dy, x, y); 
         } else {
             return null; //palautetaan null jos ei löytynyt sopivaa arvoa.
         }

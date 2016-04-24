@@ -41,7 +41,7 @@ public class Queue<E> {
      * Heapify metodi järjestää, ja varmistaa että taulu on oikeassa muodossa toiminnan kannalta.
      * @param i heapin indeksi jonka perusteella tarkistetaan heappi.
      */
-    private void heapify(int i) {
+    public void heapify(int i) {
         int l = left(i);
         int r = right(i);
         int smallest;
@@ -101,7 +101,10 @@ public class Queue<E> {
      * @return totuusarvo tyhjyydestä.
      */
     public boolean isEmpty() {
-        return (table[0] == null);
+        if(table == null){
+            return true;
+        }
+        return (table.length<1);
     }
 
     /**

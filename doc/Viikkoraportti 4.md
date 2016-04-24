@@ -12,6 +12,6 @@ Itse ohjelman toiminnan ulkopuolelle tein yksinkertaisen TestUtility käyttölii
 
 Myös testaus- ja toteutusdokumentaatiota on kirjoitettu viikon aikana. Testausdokumentissa on tehty suoritukykytestausta erilaisilla syötteillä, ja ajettu molemmat algoritmit TestUtilityn avulla moneen kertaan samalle syötteelle.
 
-JUnit testikattavuuden sain nostettua 93%:iin algoritmien osalta, ja samaan 93% tietorakenteiden osalta. JUnit testauksista puuttuu enään käytännössä jokunen harvinainen tilanne että jotain menee rikki, tai että polkua ei löytynyt tietyssä kohdassa.
+JUnit testikattavuuden sain nostettua 93%:iin algoritmien osalta, ja 82% tietorakenteiden osalta. JUnit testauksista puuttuu enään käytännössä jokunen harvinainen tilanne että jotain menee rikki, tai että polkua ei löytynyt tietyssä kohdassa.
 
 Aikaa viikolla on käytetty noin 18h.

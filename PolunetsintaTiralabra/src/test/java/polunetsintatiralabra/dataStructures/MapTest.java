@@ -35,15 +35,4 @@ public class MapTest {
             assertTrue("Getteri ei toiminut oikein", true);
         }
     }
-//    @Test
-//    public void containsTest(){
-//        Node a = new Node();
-//        Node b = new Node();
-//        a.setPosX(10);
-//        b.setPosY(10);
-//        m.put(a, b);
-//        if(m.contains(a) != -1){
-//            assertTrue("Contains ei löytänyt arvoa", true);
-//        }
-//    }
 }

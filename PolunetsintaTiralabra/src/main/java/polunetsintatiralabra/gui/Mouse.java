@@ -18,11 +18,13 @@ import static polunetsintatiralabra.gui.Grid.updateLabel;
  * @author Peter
  */
 public class Mouse implements MouseListener {
-        private static boolean startSet = false;
+
+    private static boolean startSet = false;
     private static boolean endSet = false;
-        private static Node startLabel;
+    private static Node startLabel;
     private static Node endLabel;
-        @Override
+
+    @Override
     /**
      * ctrl+mouse1 = alkupaikka ctrl+mouse3 = maali shift+mouse1 = aja astar
      * shift+mouse3 = aja JPS mouse1 = piirrä seinä mouse2 = tyhjennä ruutu
@@ -64,29 +66,34 @@ public class Mouse implements MouseListener {
             source.setPass(true);
         }
         if (arg0.getModifiers() == MouseEvent.BUTTON1_MASK + MouseEvent.SHIFT_MASK) {
+            Grid.flush();
             Astar as = new Astar();
-            long t = System.currentTimeMillis();
+            double t = System.nanoTime();
             System.out.println("Astar start");
-            as.run();
+            as.run(Grid.getStart(), Grid.getEnd());
             System.out.println("Astar end, run time: ");
-            System.out.println(System.currentTimeMillis()-t);
+            System.out.println((System.nanoTime() - t) / 1000000 + "ms");
+            
         }
         if (arg0.getModifiers() == MouseEvent.BUTTON3_MASK + MouseEvent.SHIFT_MASK) {
+            Grid.flush();
             JumpPointSearch jps = new JumpPointSearch();
-            long t = System.currentTimeMillis();
+            double t = System.nanoTime();          
             System.out.println("JPS start");
-            jps.search();
+            jps.search(Grid.getStart(), Grid.getEnd());
             System.out.println("JPS end: run time: ");
-            System.out.println(System.currentTimeMillis()-t);
+            System.out.println((System.nanoTime() - t) / 1000000 + "ms");
         }
         updateLabel(source);
     }
+
     /**
      * jos hiiren vasen eli mouse1 on pohjassa niin piirretään seinää hiiren
      * liikkuessa, jos oikea niin tyhjennetään.
      *
      * @param arg0 ruutu jonka päällä hiiri on
      */
+    @Override
     public void mouseEntered(MouseEvent arg0) {
         Node source = (Node) arg0.getSource();
         if (!(source.getBackground().equals(Color.red)) && !(source.getBackground().equals(Color.green))) {

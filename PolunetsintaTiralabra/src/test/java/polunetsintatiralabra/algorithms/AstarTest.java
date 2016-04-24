@@ -2,9 +2,7 @@ package polunetsintatiralabra.algorithms;
 
 import java.awt.Color;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import polunetsintatiralabra.algorithms.Astar;
 import polunetsintatiralabra.gui.Grid;
 import polunetsintatiralabra.gui.Node;
 
@@ -12,7 +10,7 @@ public class AstarTest {
     @Test
     public void runTest(){
         Astar as = new Astar();
-        if(as.run() == true){
+        if(as.run(Grid.getStart(), Grid.getEnd()) == true){
             assertTrue("Ohjelma ei suorittanut oikein", true);
         }
     }
@@ -21,7 +19,7 @@ public class AstarTest {
         Astar as = new Astar();
         Grid g = new Grid();
         Grid.setStart(Grid.getEnd());
-        if(as.run() == true){
+        if(as.run(Grid.getStart(), Grid.getEnd()) == true){
             assertTrue("Ohjelma ei suorittanut oikein", true);
         }
     }
@@ -34,7 +32,7 @@ public class AstarTest {
         n = g.getStart();
         n.setPosX(10);
         n2.setPosY(19);
-        if(as.run() == true){
+        if(as.run(Grid.getStart(), Grid.getEnd()) == true){
             assertTrue("Ohjelma ei suorittanut oikein", true);
         }
     }  
@@ -52,7 +50,7 @@ public class AstarTest {
         Grid.updateLabel(n);
         Grid.updateLabel(n2);
         Grid.updateLabel(n3);
-        if(as.run() == true){
+        if(as.run(Grid.getStart(), Grid.getEnd()) == true){
             assertTrue("Ohjelma ei suorittanut oikein", true);
         }
     }  

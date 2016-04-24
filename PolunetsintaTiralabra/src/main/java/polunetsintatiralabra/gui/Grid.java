@@ -223,9 +223,13 @@ public class Grid extends JFrame {
      *
      * @param next node josta peruutetaan viiva alkuun.
      */
-    public static void drawPath(Node next) { //WIP piiretään polku maalista alkupisteeseen
+    public static void drawPath(Node next) {
         while (next != Grid.getStart() || next != null) {//ei maalata loppu- ja aloituspisteitä
-            if (next.parent == null || next.parent == Grid.getStart()) {
+            if (next.parent == null) {
+                break;
+            }
+            if (next.parent == Grid.getStart()) {
+                next.setBackground(Color.pink);
                 break;
             }
             if (next == Grid.getEnd()) {
@@ -262,6 +266,8 @@ public class Grid extends JFrame {
     }
 
     public static void main(String[] arg) {
+        TestUtility tu = new TestUtility();
+        tu.setVisible(true);
         Grid cb = new Grid();
         cb.setSize(512, 512);
         cb.setVisible(true);

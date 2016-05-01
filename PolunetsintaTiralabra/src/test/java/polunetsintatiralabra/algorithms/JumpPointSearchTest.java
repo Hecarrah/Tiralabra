@@ -15,7 +15,7 @@ public class JumpPointSearchTest {
     public void searchTest() {
         JumpPointSearch as = new JumpPointSearch();
         if (as.search(Grid.getStart(), Grid.getEnd())) {
-            assertTrue("Ohjelma ei suorittanut oikein", true);
+            assertTrue("JPS ei suorittanut oikein", true);
         }
     }
 
@@ -30,14 +30,14 @@ public class JumpPointSearchTest {
         Node[] nt = as.identifySuccessors(n);
         for (int i = 0; i < 8; i++) {
             if (nt[i] == null) {
-                assertTrue("Ohjelma ei suorittanut oikein", true);
+                assertTrue("JPS ei suorittanut oikein", true);
             }
         }
         n = Grid.getStart();
         nt = as.identifySuccessors(n);
         for (int i = 0; i < 8; i++) {
             if (nt[i] == null) {
-                assertTrue("Ohjelma ei suorittanut oikein", true);
+                assertTrue("IdentifySuccessors ei suorittanut oikein", true);
             }
         }
     }
@@ -53,7 +53,7 @@ public class JumpPointSearchTest {
         Node[] nt = as.pruneNeighbors(n);
         for (int i = 0; i < 8; i++) {
             if (nt[i] != null) {
-                assertTrue("Ohjelma ei suorittanut oikein", true);
+                assertTrue("PruneNeighborts ei suorittanut oikein", true);
             }
         }
     }
@@ -74,7 +74,7 @@ public class JumpPointSearchTest {
         Node[] nt = as.pruneNeighbors(n);
         for (int i = 0; i < 5; i++) {
             if (nt[i] != null) {
-                assertTrue("Ohjelma ei suorittanut oikein", true);
+                assertTrue("PruneNeighbortsDiagonal ei suorittanut oikein", true);
             }
         }
     }
@@ -94,7 +94,7 @@ public class JumpPointSearchTest {
         Node[] nt = as.pruneNeighbors(n);
         for (int i = 0; i < 3; i++) {
             if (nt[i] != null) {
-                assertTrue("Ohjelma ei suorittanut oikein", true);
+                assertTrue("PruneNeighbortsVertical ei suorittanut oikein", true);
             }
         }
     }
@@ -114,7 +114,7 @@ public class JumpPointSearchTest {
         Node[] nt = as.pruneNeighbors(n);
         for (int i = 0; i < 3; i++) {
             if (nt[i] != null) {
-                assertTrue("Ohjelma ei suorittanut oikein", true);
+                assertTrue("PruneNeighbortsHorizontal ei suorittanut oikein", true);
             }
         }
     }
@@ -125,7 +125,7 @@ public class JumpPointSearchTest {
         JumpPointSearch as = new JumpPointSearch();
         Node n = as.jump(1, 1, 0, 0);
         if (n == Grid.getEnd()) {
-            assertTrue("Ohjelma ei suorittanut oikein", true);
+            assertTrue("Jump ei suorittanut oikein", true);
         }
     }
 

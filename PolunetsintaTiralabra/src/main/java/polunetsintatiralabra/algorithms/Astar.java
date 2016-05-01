@@ -10,9 +10,8 @@ import polunetsintatiralabra.gui.Node;
  */
 public class Astar {
 
-    private Queue<Node> frontier = new Queue<Node>();
-    private Map<Node, Integer> cost_so_far = new Map<Node, Integer>();
-    private boolean[][] visited = new boolean[128][128];
+    private final Queue<Node> frontier = new Queue<>();
+    private final Map<Node, Integer> cost_so_far = new Map<>();
     private Node end = null;
     private Node start = null;
 
@@ -33,7 +32,7 @@ public class Astar {
         start = s;
         frontier.add(start);
 
-        while (end != null && start != null && !frontier.isEmpty()) {
+        while (end != null && start != null && !frontier.isEmpty()) { //O(n)
             Node current = frontier.poll();
             if (current == null) {
                 return false;
@@ -43,19 +42,16 @@ public class Astar {
                 System.out.println("Path found");
                 return true;
             }
-            Node[] Neighbours = Grid.getNeighbours(current);
-            for (Node next : Neighbours) {
+            Node[] Neighbours = Grid.getNeighbours(current); //O(1)
+            for (Node next : Neighbours) { //O(n)
                 if (next != null) {
-                    int new_cost = (int) cost_so_far.get(current) + 1;
-                    if (visited[next.getPosX()][next.getPosY()] == false || new_cost < (int) cost_so_far.get(next)) {
-                        visited[next.getPosX()][next.getPosY()] = true; //merkitään paikka käydyksi
-
+                    int new_cost = (int) cost_so_far.get(current) + distance(current, next);
+                    if (cost_so_far.get(next) == null || new_cost < (int) cost_so_far.get(next)) {
                         if (isEnd(next, current)) { //Algoritmi on suoritettu loppuun, maali löydetty
                             return true;
                         }
-
-                        next.setPriority(new_cost + distance(end, next)); //prioriteetti maalin läheisyyden perusteella.
                         cost_so_far.put(next, new_cost);
+                        next.setPriority(new_cost + distance(end, next)); //prioriteetti maalin läheisyyden perusteella.
                         frontier.add(next);
                         next.parent = current;
 

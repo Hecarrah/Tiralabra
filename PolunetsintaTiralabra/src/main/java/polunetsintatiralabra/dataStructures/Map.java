@@ -21,7 +21,7 @@ public class Map<K, V> {
      */
     public int hashC(Object o) {
         int hash = 0;
-        hash = 3 % o.hashCode();
+        hash = o.hashCode() % 100000;
         return hash;
     }
 

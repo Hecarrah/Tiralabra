@@ -10,8 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import polunetsintatiralabra.algorithms.Astar;
 import polunetsintatiralabra.algorithms.JumpPointSearch;
-import static polunetsintatiralabra.gui.Grid.getLabelCoords;
-import static polunetsintatiralabra.gui.Grid.updateLabel;
 
 /**
  *
@@ -58,7 +56,7 @@ public class Mouse implements MouseListener {
             } else if (arg0.getModifiers() == MouseEvent.BUTTON1_MASK) {
                 source.setBackground(Color.DARK_GRAY);
                 source.setPass(false);
-                int[] t = getLabelCoords(source);
+                int[] t = Grid.getLabelCoords(source);
                 System.out.println("x: " + t[0] + " y: " + t[1]);
             }
         } else if (arg0.getModifiers() == MouseEvent.BUTTON3_MASK) {
@@ -73,18 +71,18 @@ public class Mouse implements MouseListener {
             as.run(Grid.getStart(), Grid.getEnd());
             System.out.println("Astar end, run time: ");
             System.out.println((System.nanoTime() - t) / 1000000 + "ms");
-            
+
         }
         if (arg0.getModifiers() == MouseEvent.BUTTON3_MASK + MouseEvent.SHIFT_MASK) {
             Grid.flush();
             JumpPointSearch jps = new JumpPointSearch();
-            double t = System.nanoTime();          
+            double t = System.nanoTime();
             System.out.println("JPS start");
             jps.search(Grid.getStart(), Grid.getEnd());
             System.out.println("JPS end: run time: ");
             System.out.println((System.nanoTime() - t) / 1000000 + "ms");
         }
-        updateLabel(source);
+        Grid.updateLabel(source);
     }
 
     /**
@@ -106,12 +104,15 @@ public class Mouse implements MouseListener {
                 source.setPass(true);
             }
         }
-        updateLabel(source);
+        Grid.updateLabel(source);
     }
+
     public void mouseExited(MouseEvent arg0) {
     }
+
     public void mousePressed(MouseEvent arg0) {
     }
+
     public void mouseReleased(MouseEvent arg0) {
     }
 }

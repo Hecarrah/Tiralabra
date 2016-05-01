@@ -14,6 +14,7 @@ public class Grid extends JFrame {
     private static final int size = 32;
     private static Node startLabel;
     private static Node endLabel;
+    private static JPanel panel;
 
     public Grid() {
         /**
@@ -24,7 +25,7 @@ public class Grid extends JFrame {
          * loppupisteitä.
          */
         super("Field");
-        JPanel panel = new JPanel(new GridLayout(size, size));
+        panel = new JPanel(new GridLayout(size, size));
         label = new Node[size][size];
         for (int j = 0; j < size; j++) {
             for (int i = 0; i < size; i++) {
@@ -113,10 +114,18 @@ public class Grid extends JFrame {
         n[2] = getLabelAtCoords(current.getPosX() + 1, current.getPosY() + 0);
         n[3] = getLabelAtCoords(current.getPosX() + 0, current.getPosY() + 1);
 
-        n[4] = getLabelAtCoords(current.getPosX() - 1, current.getPosY() - 1);
-        n[5] = getLabelAtCoords(current.getPosX() + 1, current.getPosY() - 1);
-        n[6] = getLabelAtCoords(current.getPosX() - 1, current.getPosY() + 1);
-        n[7] = getLabelAtCoords(current.getPosX() + 1, current.getPosY() + 1);
+        if (getLabelAtCoords(current.getPosX() - 1, current.getPosY() + 0) != null && getLabelAtCoords(current.getPosX() + 0, current.getPosY() - 1) != null) {
+            n[4] = getLabelAtCoords(current.getPosX() - 1, current.getPosY() - 1);
+        }
+        if (getLabelAtCoords(current.getPosX() + 1, current.getPosY() + 0) != null && getLabelAtCoords(current.getPosX() + 0, current.getPosY() - 1) != null) {
+            n[5] = getLabelAtCoords(current.getPosX() + 1, current.getPosY() - 1);
+        }
+        if (getLabelAtCoords(current.getPosX() - 1, current.getPosY() + 0) != null && getLabelAtCoords(current.getPosX() + 0, current.getPosY() + 1) != null) {
+            n[6] = getLabelAtCoords(current.getPosX() - 1, current.getPosY() + 1);
+        }
+        if (getLabelAtCoords(current.getPosX() + 1, current.getPosY() + 0) != null && getLabelAtCoords(current.getPosX() + 0, current.getPosY() + 1) != null) {
+            n[7] = getLabelAtCoords(current.getPosX() + 1, current.getPosY() + 1);
+        }
         return n;
     }
 
@@ -224,15 +233,15 @@ public class Grid extends JFrame {
      * @param next node josta peruutetaan viiva alkuun.
      */
     public static void drawPath(Node next) {
-        while (next != Grid.getStart() || next != null) {//ei maalata loppu- ja aloituspisteitä
+        while (next != getStart() || next != null) {//ei maalata loppu- ja aloituspisteitä
             if (next.parent == null) {
                 break;
             }
-            if (next.parent == Grid.getStart()) {
+            if (next.parent == getStart()) {
                 next.setBackground(Color.pink);
                 break;
             }
-            if (next == Grid.getEnd()) {
+            if (next == getEnd()) {
                 next = next.parent;
             } else {
                 next.setBackground(Color.pink);
@@ -240,14 +249,13 @@ public class Grid extends JFrame {
             }
         }
     }
-
     /**
      * väritetään nodet
      *
      * @param next väritettävä node
      */
-    public static void colorNodes(Node next) { //maalataan käydyt nodet
-        if (next != Grid.getEnd() && next != Grid.getStart()) {
+    public static  void colorNodes(Node next) { //maalataan käydyt nodet
+        if (next != getEnd() && next != getStart()) {
             next.setBackground(Color.gray);
         }
     }

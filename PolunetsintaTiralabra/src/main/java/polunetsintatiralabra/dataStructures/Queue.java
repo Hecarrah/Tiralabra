@@ -15,30 +15,38 @@ public class Queue<E> {
 
     /**
      * Vanhempi
+     *
      * @param i heapin indeksi jonka vanhempi haetaan
      * @return vanhemman indeksi
      */
     private int parent(int i) {
         return Math.floorDiv(i, 2);
     }
+
     /**
      * Vasen lapsi
+     *
      * @param i heapin indeksi jonka lapsi haetaan
      * @return lapsen indeksi
      */
     private int left(int i) {
         return 2 * i;
     }
+
     /**
      * Oikea lapsi
+     *
      * @param i heapin indeksi jonka lapsi haetaan
      * @return lapsen indeksi
      */
     private int right(int i) {
         return (2 * i) + 1;
     }
+
     /**
-     * Heapify metodi järjestää, ja varmistaa että taulu on oikeassa muodossa toiminnan kannalta.
+     * Heapify metodi järjestää, ja varmistaa että taulu on oikeassa muodossa
+     * toiminnan kannalta.
+     *
      * @param i heapin indeksi jonka perusteella tarkistetaan heappi.
      */
     public void heapify(int i) {
@@ -63,8 +71,10 @@ public class Queue<E> {
             }
         }
     }
+
     /**
      * Muutetaan heapin kokoa.
+     *
      * @param n kuinka paljon, ja miten heapin kokoa muutetaan
      */
     private void resize(int n) {
@@ -72,8 +82,10 @@ public class Queue<E> {
         table2 = Arrays.copyOf(table, table.length + n);
         table = table2;
     }
+
     /**
      * poistetaan heapista pienin arvo.
+     *
      * @return pienin arvo.
      */
     private Node heap_del_min() {
@@ -83,8 +95,10 @@ public class Queue<E> {
         heapify(0);
         return min;
     }
+
     /**
      * Lisätään heappiin arvo.
+     *
      * @param k lisättävä arvo.
      */
     private void heap_insert(Node k) {
@@ -96,15 +110,17 @@ public class Queue<E> {
         }
         table[i] = k;
     }
+
     /**
      * Tarkistetaan onko jono tyhjä.
+     *
      * @return totuusarvo tyhjyydestä.
      */
     public boolean isEmpty() {
-        if(table == null){
+        if (table == null) {
             return true;
         }
-        return (table.length<1);
+        return (table.length < 1);
     }
 
     /**
@@ -119,7 +135,7 @@ public class Queue<E> {
     }
 
     /**
-     * Haetaan arvo jonosta sen tärkeyden perusteella. 
+     * Haetaan arvo jonosta sen tärkeyden perusteella.
      *
      * @return palautettava node.
      */

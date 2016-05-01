@@ -11,7 +11,7 @@ public class AstarTest {
     public void runTest(){
         Astar as = new Astar();
         if(as.run(Grid.getStart(), Grid.getEnd()) == true){
-            assertTrue("Ohjelma ei suorittanut oikein", true);
+            assertTrue("A* ei suorittanut oikein", true);
         }
     }
     @Test(timeout=3000)
@@ -20,7 +20,7 @@ public class AstarTest {
         Grid g = new Grid();
         Grid.setStart(Grid.getEnd());
         if(as.run(Grid.getStart(), Grid.getEnd()) == true){
-            assertTrue("Ohjelma ei suorittanut oikein", true);
+            assertTrue("A* ei suorittanut oikein", true);
         }
     }
     @Test(timeout=2000)
@@ -33,7 +33,7 @@ public class AstarTest {
         n.setPosX(10);
         n2.setPosY(19);
         if(as.run(Grid.getStart(), Grid.getEnd()) == true){
-            assertTrue("Ohjelma ei suorittanut oikein", true);
+            assertTrue("A* ei suorittanut oikein", true);
         }
     }  
     @Test
@@ -51,7 +51,7 @@ public class AstarTest {
         Grid.updateLabel(n2);
         Grid.updateLabel(n3);
         if(as.run(Grid.getStart(), Grid.getEnd()) == true){
-            assertTrue("Ohjelma ei suorittanut oikein", true);
+            assertTrue("A* ei suorittanut oikein", true);
         }
     }  
     @Test
@@ -65,8 +65,8 @@ public class AstarTest {
         n.setBackground(Color.yellow);
         n2.setBackground(Color.yellow);
         Grid.flush();
-        if(n.getBackground() != Color.yellow){
-            assertTrue("Ohjelma ei suorittanut oikein", true);
+        if(n.getBackground() != Color.yellow && n2.getBackground() != Color.yellow){
+            assertTrue("A* ei suorittanut oikein", true);
         }
     } 
     @Test

@@ -1,6 +1,5 @@
 package polunetsintatiralabra.algorithms;
 
-import java.awt.Color;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import polunetsintatiralabra.gui.Grid;

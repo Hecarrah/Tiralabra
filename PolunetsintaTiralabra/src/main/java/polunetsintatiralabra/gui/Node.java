@@ -3,7 +3,7 @@ package polunetsintatiralabra.gui;
 import javax.swing.JLabel;
 
 /**
- * Node luokka reitinhakua varten
+ * Node luokka reitinhakua varten.
  *
  * @author Peter
  */
@@ -16,42 +16,42 @@ public class Node extends JLabel implements Comparable {
     public boolean pass = true;
 
     /**
-     * @param x asettaa noden x koordinaatin
+     * @param x asettaa noden x koordinaatin.
      */
     public void setPosX(int x) {
         posx = x;
     }
 
     /**
-     * @param y asettaa noden y koordinaatin
+     * @param y asettaa noden y koordinaatin.
      */
     public void setPosY(int y) {
         posy = y;
     }
 
     /**
-     * @return palauttaa noden x koordinaatin
+     * @return palauttaa noden x koordinaatin.
      */
     public int getPosX() {
         return posx;
     }
 
     /**
-     * @return palauttaa noden y koordinaatin
+     * @return palauttaa noden y koordinaatin.
      */
     public int getPosY() {
         return posy;
     }
 
     /**
-     * @return palauttaa noden prioriteetti arvon
+     * @return palauttaa noden prioriteetti arvon.
      */
     public int getPriority() {
         return priority;
     }
 
     /**
-     * @param c asettaa noden prioriteetti arvon
+     * @param c asettaa noden prioriteetti arvon.
      */
     public void setPriority(int c) {
         priority = c;
@@ -78,7 +78,7 @@ public class Node extends JLabel implements Comparable {
     /**
      * Vertailee kahta nodea keskenään.
      *
-     * @param o vertailtava node
+     * @param o vertailtava node.
      * @return int arvo joka kertoo kumpi on parempi. positiivinen jos nykyinen
      * on parempi, negatiivinen jos vertailtava on parempi.
      */

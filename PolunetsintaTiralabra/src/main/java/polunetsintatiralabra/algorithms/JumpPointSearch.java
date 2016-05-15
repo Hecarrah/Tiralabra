@@ -7,6 +7,10 @@ import polunetsintatiralabra.gui.Node;
 /**
  * @author Peter
  */
+/**
+ * Astar polunetsintäalgoritmi.
+ * @author Peter
+ */
 public class JumpPointSearch {
 
     Node[] neighbors = new Node[8];
@@ -19,7 +23,7 @@ public class JumpPointSearch {
     private final boolean[][] visited = new boolean[128][128];
 
     /**
-     * Käydään läpi mahdolliset sijainnit
+     * Käydään läpi mahdolliset sijainnit.
      *
      * @param s Alkupiste.
      * @param e Loppupiste.
@@ -34,18 +38,18 @@ public class JumpPointSearch {
         if (cur == end) {
             return true;
         }
-        while (true) { //jos nykyinen node ei ole vielä maali. O(n)
+        while (true) { //jos nykyinen node ei ole vielä maali. O(n).
             cur = frontier.poll();
-            possibleSuccess = identifySuccessors(cur); //O(n) mahdollisten paikkojen mukaan
+            possibleSuccess = identifySuccessors(cur); //O(n) mahdollisten paikkojen mukaan.
             if (possibleSuccess == null) {
                 break;
             }
-            iteratePossibilities(); //O(n) mahdollisten suhteen
-            if (frontier.isEmpty()) {  //maalia ei löytynyt
+            iteratePossibilities(); //O(n) mahdollisten suhteen.
+            if (frontier.isEmpty()) {  //maalia ei löytynyt.
                 //System.out.println("No Path Found");
                 break;
             }
-            if (cur == end) { //maali löytyi
+            if (cur == end) { //maali löytyi.
                 //System.out.println("Path Found");
                 Grid.drawPath(cur);
                 break;
@@ -55,44 +59,44 @@ public class JumpPointSearch {
     }
 
     private void iteratePossibilities() {
-        for (Node i : possibleSuccess) {//käydään läpi kaikki mahdolliset sijainnit
+        for (Node i : possibleSuccess) {//käydään läpi kaikki mahdolliset sijainnit.
             Grid.updateLabel(i);
             if (i != null) {
                 frontier.add(i);
-                if (i == end) {// maali löytyi
+                if (i == end) {// maali löytyi.
                     cur = end;
                     break;
                 }
-                Grid.colorNodes(i); //väritetään käydyt nodet
+                Grid.colorNodes(i); //väritetään käydyt nodet.
             }
         }
     }
 
     /**
-     * haetaan kaikki nodet joihin hypättiin nodesta
+     * haetaan kaikki nodet joihin hypättiin nodesta.
      *
-     * @param cur node josta lähdetään
-     * @return kaikki nodet joihin hypättiin
+     * @param cur node josta lähdetään.
+     * @return kaikki nodet joihin hypättiin.
      */
     public Node[] identifySuccessors(Node cur) {
         successors = new Node[8];
         neighbors = pruneNeighbors(cur);
-        if (neighbors == null) { //jos naapureita ei ole niin palautetaan null
+        if (neighbors == null) { //jos naapureita ei ole niin palautetaan null.
             return null;
         }
-        for (int i = 0; i < neighbors.length; i++) { //käydään kaikki naapurit läpi O(n)
+        for (int i = 0; i < neighbors.length; i++) { //käydään kaikki naapurit läpi O(n).
             if (neighbors[i] != null) { //tarkistetaan nullien varalta
                 if (neighbors[i].pass) {
                     int a = neighbors[i].getPosX();
                     int b = neighbors[i].getPosY();
-                    Node tmpnode = jump(a, b, cur.getPosX(), cur.getPosY()); //hypätään nodesta
-                    if (tmpnode != null) { //tarkistetaan nullien varalta
+                    Node tmpnode = jump(a, b, cur.getPosX(), cur.getPosY()); //hypätään nodesta.
+                    if (tmpnode != null) { //tarkistetaan nullien varalta.
                         int x = tmpnode.getPosX();
                         int y = tmpnode.getPosY();
                         ng = distance(start, cur); //lasketaan etäisyys aloituspisteestä.
                         if (visited[x][y] == false || distance(start, Grid.getLabelAtCoords(x, y)) > ng) { // jos ei olla tarkistettu jotain nodea, tai etäisyys on suurempi.
                             visited[x][y] = true; //merkitään käydyksi
-                            Grid.getLabelAtCoords(x, y).setParent(cur);//merkitään mistä nodesta tultiin nykyiseen
+                            Grid.getLabelAtCoords(x, y).setParent(cur);//merkitään mistä nodesta tultiin nykyiseen.
                             successors[i] = Grid.getLabelAtCoords(x, y); //ja lisätään se seuraajiin.
                         }
                     }
@@ -106,16 +110,16 @@ public class JumpPointSearch {
      * Haetaan naapurit joihin tulisi hypätä sen perusteella mistä päin ollaan
      * tulossa.
      *
-     * @param n node jonka naapurit haetaan
+     * @param n node jonka naapurit haetaan.
      * @return node[] joka sisältää kaikki nodet joihin tulisi hypätä.
      */
     public Node[] pruneNeighbors(Node n) { //O(n)
         Grid.updateLabel(n);
         Node parent;
-        if (n == null) { //jos node on null niin ei haeta yhtään mitään
+        if (n == null) { //jos node on null niin ei haeta yhtään mitään.
             return null;
         } else {
-            parent = n.parent; //haetaan vanhempi
+            parent = n.parent; //haetaan vanhempi.
         }
         int x = n.getPosX();
         int y = n.getPosY();
@@ -123,19 +127,19 @@ public class JumpPointSearch {
         if (parent != null) { //jos tiedetään mistä päin tullaa.
             px = parent.getPosX();
             py = parent.getPosY();
-            dx = (x - px) / Math.max(Math.abs(x - px), 1); //mistä päin ollaan tultu x koordinaatissa. Arvo -1..1
-            dy = (y - py) / Math.max(Math.abs(y - py), 1); //mistä päin ollaan tultu y koordinaatissa. Arvo -1..1
-            if (dx != 0 && dy != 0) { //diagonal
+            dx = (x - px) / Math.max(Math.abs(x - px), 1); //mistä päin ollaan tultu x koordinaatissa. Arvo -1..1.
+            dy = (y - py) / Math.max(Math.abs(y - py), 1); //mistä päin ollaan tultu y koordinaatissa. Arvo -1..1.
+            if (dx != 0 && dy != 0) { //diagonal.
                 getDiagonals(x, y, dx, dy);
-            } else if (dx == 0) { //horizontal
+            } else if (dx == 0) { //horizontal.
                 getHorizontals(x, y, dx, dy);
-            } else if (Grid.passable(x + dx, y)) { //vertical
+            } else if (Grid.passable(x + dx, y)) { //vertical.
                 getVerticals(x, y, dx, dy);
             }
-        } else {//return all neighbors
+        } else {//return all neighbors.
             return Grid.getNeighbours(n);
         }
-        for (Node i : neighbors) { //päivitetään nodet
+        for (Node i : neighbors) { //päivitetään nodet.
             Grid.updateLabel(i);
         }
         return neighbors;
@@ -220,11 +224,11 @@ public class JumpPointSearch {
      * vanhempaa(px,py) lapsi(x,y) on. palauttaa arvon jos löydetty node on
      * maali, pakotettu naapuri, tai väliarvo edellämainittujen saavuttamiseksi.
      *
-     * @param x Nykyinen x Koordinaatti
-     * @param y Nykyinen y Koordinaatti
-     * @param px Vanhemman x koordinaatti
-     * @param py Vanhemman y koordinaatti
-     * @return node johon hypättiin, tai null jos ei löytynyt sopivaa
+     * @param x Nykyinen x Koordinaatti.
+     * @param y Nykyinen y Koordinaatti.
+     * @param px Vanhemman x koordinaatti.
+     * @param py Vanhemman y koordinaatti.
+     * @return node johon hypättiin, tai null jos ei löytynyt sopivaa.
      */
     public Node jump(int x, int y, int px, int py) {
         Node jx = null;
@@ -237,21 +241,21 @@ public class JumpPointSearch {
         int dx = (x - px) / Math.max(Math.abs(x - px), 1);
         int dy = (y - py) / Math.max(Math.abs(y - py), 1);
 
-        if (!node.pass) { //node ei ole mahdollinen sijainti
+        if (!node.pass) { //node ei ole mahdollinen sijainti.
             return null;
         }
-        if (node == end) { //ollaanko maalissa
+        if (node == end) { //ollaanko maalissa.
             return node;
         }
 
         if (dx != 0 && dy != 0) { //diagonal, Tarkistetaan onko noden vieressä seinä ja jos on niin haetaan vinosti.
             //jälkimmäisten nodejen tulisi olla !(false) eli true kun kyseessä on seinä, mutta jostain syystä ei tässä kohtaa tunnisteta seinäksi tai muuten vaan temppuilee koska antaa jatkuvasti kaikilla arvoilla !(true) eli falsen jolloin ei päästä koskaan pakottamaan naapuria.
-            if ((Grid.passable((x - dx), (y + dy)) && !(Grid.passable((x + dx), y))) //syystä tai toisesta ei melkein koskaan saa arvoa true, vaikka pitäisi
+            if ((Grid.passable((x - dx), (y + dy)) && !(Grid.passable((x + dx), y))) //syystä tai toisesta ei melkein koskaan saa arvoa true, vaikka pitäisi.
                     || (Grid.passable((x + dx), (y - dy)) && !(Grid.passable(x, (y - dy))))) { //ja siten algoritmi ei useasti löydä maalia jos on jonkin seinän takana, ja tarpeeksi lähellä sitä.
                 //System.out.println("forced");//15.4 toimii jotenkuten nyt.
                 return node;
             }
-        } else //horizontal / vertical
+        } else //horizontal / vertical.
         {
             if (dx != 0) { //x
                 if ((Grid.passable(x + dx, y + 1) && !Grid.passable(x, y + 1))
@@ -266,14 +270,14 @@ public class JumpPointSearch {
                 }
             }
         }
-        if (dx != 0 && dy != 0) { //vinosti liikuttaessa etsitään sivu/pystysuunnissa olevat pisteet
+        if (dx != 0 && dy != 0) { //vinosti liikuttaessa etsitään sivu/pystysuunnissa olevat pisteet.
             jx = jump(x + dx, y, x, y);
             jy = jump(x, y + dx, x, y);
             if (jx != null || jy != null) {
                 return node;
             }
         }
-        if (Grid.passable(x + dx, y) || Grid.passable(x, y + dy)) { //tarkistetaan että sivu ja pysty suunnassa pääsee liikkumaan
+        if (Grid.passable(x + dx, y) || Grid.passable(x, y + dy)) { //tarkistetaan että sivu ja pysty suunnassa pääsee liikkumaan.
             return jump(x + dx, y + dy, x, y);
         } else {
             return null; //palautetaan null jos ei löytynyt sopivaa arvoa.

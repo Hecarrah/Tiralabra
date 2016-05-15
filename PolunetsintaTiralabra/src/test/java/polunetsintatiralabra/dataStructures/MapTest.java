@@ -35,4 +35,13 @@ public class MapTest {
             assertTrue("Getteri ei toiminut oikein", true);
         }
     }
+        @Test
+        public void openTest(){
+        Node a = new Node();
+        Node b = new Node();
+        a.setPosX(10);
+        b.setPosY(10);
+        m.openHash(0, a, b);
+        m.openHash(10000-3, a, b);
+        }
 }

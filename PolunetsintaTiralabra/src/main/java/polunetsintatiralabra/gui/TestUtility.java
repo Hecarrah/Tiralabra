@@ -8,8 +8,15 @@ import javax.swing.JFrame;
 import polunetsintatiralabra.algorithms.Astar;
 import polunetsintatiralabra.algorithms.JumpPointSearch;
 
+/**
+ * Apuohjelma algoritmien testaamista varten.
+ * @author Peter
+ */
 public class TestUtility extends JFrame implements ActionListener {
 
+    /**
+     * Initialisoidaan TestUtility.
+     */
     public TestUtility() {
         super("TestUtility");
         this.setLayout(new FlowLayout());
@@ -26,7 +33,11 @@ public class TestUtility extends JFrame implements ActionListener {
         this.setSize(200, 200);
 
     }
-
+    /**
+     * Suoritetaan algoritmit.
+     * Suoritetaan annettu algoritmi 100000 kertaa, jonka jälkeen palautetaan keskiarvo suoritusten pituudesta konsoliin.
+     * @param e ActionEvent jonka perusteella tiedetään mitä nappia painettiin.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         double total_time = 0;

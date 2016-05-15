@@ -4,7 +4,7 @@ import java.util.Arrays;
 import polunetsintatiralabra.gui.Node;
 
 /**
- * Queue olio jonka idea on korvata Javan PriorityQueue projektissa.
+ * Queue olio joka korvaa Javan PriorityQueue projektissa.
  *
  * @author Peter
  * @param <E> Olion tyyppi.
@@ -14,46 +14,45 @@ public class Queue<E> {
     Node[] table = new Node[0];
 
     /**
-     * Vanhempi
+     * Vanhempi.
      *
-     * @param i heapin indeksi jonka vanhempi haetaan
-     * @return vanhemman indeksi
+     * @param i heapin indeksi jonka vanhempi haetaan.
+     * @return vanhemman indeksi.
      */
     private int parent(int i) {
         return Math.floorDiv(i, 2);
     }
 
     /**
-     * Vasen lapsi
+     * Vasen lapsi.
      *
-     * @param i heapin indeksi jonka lapsi haetaan
-     * @return lapsen indeksi
+     * @param i heapin indeksi jonka lapsi haetaan.
+     * @return lapsen indeksi.
      */
     private int left(int i) {
         return 2 * i;
     }
 
     /**
-     * Oikea lapsi
+     * Oikea lapsi.
      *
-     * @param i heapin indeksi jonka lapsi haetaan
-     * @return lapsen indeksi
+     * @param i heapin indeksi jonka lapsi haetaan.
+     * @return lapsen indeksi.
      */
     private int right(int i) {
         return (2 * i) + 1;
     }
 
     /**
-     * Heapify metodi järjestää, ja varmistaa että taulu on oikeassa muodossa
-     * toiminnan kannalta.
+     * Heapify metodi järjestää, ja varmistaa että taulu on oikeassa muodossa toiminnan kannalta.
      *
      * @param i heapin indeksi jonka perusteella tarkistetaan heappi.
      */
     public void heapify(int i) {
         int l = left(i);
         int r = right(i);
-        int smallest;
-        if (r < table.length - 1) {
+        int smallest = 0;
+        if (r < table.length-1) {
             if (table[l].compareTo(table[r]) < 1) {
                 smallest = l;
             } else {
@@ -75,7 +74,7 @@ public class Queue<E> {
     /**
      * Muutetaan heapin kokoa.
      *
-     * @param n kuinka paljon, ja miten heapin kokoa muutetaan
+     * @param n kuinka paljon, ja miten heapin kokoa muutetaan.
      */
     private void resize(int n) {
         Node[] table2;
@@ -126,8 +125,8 @@ public class Queue<E> {
     /**
      * Lisätään arvo jonoon.
      *
-     * @param o Lisättävä node
-     * @return totuusarvo metodin suorituksesta
+     * @param o Lisättävä node.
+     * @return totuusarvo metodin suorituksesta.
      */
     public boolean add(Node o) {
         heap_insert(o);

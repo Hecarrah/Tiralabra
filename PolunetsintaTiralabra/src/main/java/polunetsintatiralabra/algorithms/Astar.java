@@ -21,11 +21,11 @@ public class Astar {
      * valitaan niistä paras vaihtoehto maaliinpääsemisen kannalta. Samalla
      * käydään läpi reittiä taaksepäin ja merkitään käyttöliittymään selkeämmin,
      * pinkillä värillä itse polku Käyttöliittymään merkitään myös kaikki
-     * käsitellyt solut muuttuvalla värillä
+     * käsitellyt solut muuttuvalla värillä.
      *
      * @param s Alkupiste.
      * @param e Loppupiste.
-     * @return boolean että algoritmi on suoritettu onnistuneesti
+     * @return boolean että algoritmi on suoritettu onnistuneesti.
      */
     public boolean run(Node s, Node e) {
         end = e;
@@ -38,7 +38,7 @@ public class Astar {
                 return false;
             }
             cost_so_far.put(current, 1);
-            if (current == end) { //Algoritmi on suoritettu loppuun
+            if (current == end) { //Algoritmi on suoritettu loppuun.
                 System.out.println("Path found");
                 return true;
             }
@@ -47,7 +47,7 @@ public class Astar {
                 if (next != null) {
                     int new_cost = (int) cost_so_far.get(current) + distance(current, next);
                     if (cost_so_far.get(next) == null || new_cost < (int) cost_so_far.get(next)) {
-                        if (isEnd(next, current)) { //Algoritmi on suoritettu loppuun, maali löydetty
+                        if (isEnd(next, current)) { //Algoritmi on suoritettu loppuun, maali löydetty.
                             return true;
                         }
                         cost_so_far.put(next, new_cost);
@@ -72,9 +72,9 @@ public class Astar {
      * @return boolean, tosi jos on loppupiste, false muuten.
      */
     public boolean isEnd(Node node, Node current) {
-        if (node == end) { //Algoritmi on suoritettu loppuun, maali löydetty
+        if (node == end) { //Algoritmi on suoritettu loppuun, maali löydetty.
             node.parent = current;
-            Grid.drawPath(node); //piirretään itse polku
+            Grid.drawPath(node); //piirretään itse polku.
             //System.out.println("done");
             return true;
         } else {
@@ -85,7 +85,7 @@ public class Astar {
     /**
      * distance metodi kertoo pituuden kahden noden välillä.
      *
-     * @param a kohde node
+     * @param a kohde node.
      * @param b node josta halutaan kohteeseen.
      * @return matka sijainnista kohteeseen
      */

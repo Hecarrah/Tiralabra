@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polunetsintatiralabra.gui;
 
 import java.awt.Color;
@@ -24,10 +19,15 @@ public class Mouse implements MouseListener {
 
     @Override
     /**
-     * ctrl+mouse1 = alkupaikka ctrl+mouse3 = maali shift+mouse1 = aja astar
-     * shift+mouse3 = aja JPS mouse1 = piirrä seinä mouse2 = tyhjennä ruutu
+     * Käsitellään hiiren painamisen tapahtumat.
+     * ctrl+mouse1 = alkupaikka.
+     * ctrl+mouse3 = maali.
+     * shift+mouse1 = aja astar.
+     * shift+mouse3 = aja JPS.
+     * mouse1 = piirrä seinä.
+     * mouse2 = tyhjennä ruutu.
      *
-     * @param arg0 ruutu jonka päällä hiiri on tapahtuman hetkellä
+     * @param arg0 ruutu jonka päällä hiiri on tapahtuman hetkellä.
      */
     public void mouseClicked(MouseEvent arg0) {
         Node source = (Node) arg0.getSource();
@@ -89,7 +89,7 @@ public class Mouse implements MouseListener {
      * jos hiiren vasen eli mouse1 on pohjassa niin piirretään seinää hiiren
      * liikkuessa, jos oikea niin tyhjennetään.
      *
-     * @param arg0 ruutu jonka päällä hiiri on
+     * @param arg0 ruutu jonka päällä hiiri on.
      */
     @Override
     public void mouseEntered(MouseEvent arg0) {

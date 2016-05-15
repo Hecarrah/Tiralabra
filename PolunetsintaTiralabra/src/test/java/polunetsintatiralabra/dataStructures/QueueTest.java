@@ -91,4 +91,35 @@ public class QueueTest {
             assertTrue("Poll ei palauttanut oikeaa arvoa", true);
         }
     }
+    @Test
+    public void heapifyTest(){
+        int i = 0;
+        Node a = new Node();
+        Node b = new Node();
+        b.setPriority(200);
+        q.add(a);
+        q.table[i] = b;
+        q.heapify(i);
+        Node c = q.poll();
+        if(c.equals(b)){
+            assertTrue("Poll ei palauttanut oikeaa arvoa", true);
+        }
+    }
+    @Test
+    public void heapifyTest2(){
+        Node b = new Node();
+        Node d = new Node();
+        Node e = new Node();
+        b.setPriority(30);
+        e.setPriority(100);
+        d.setPriority(500);
+        q.add(b);
+        q.add(d);
+        q.add(e);
+        q.heapify(1);
+        Node c = q.poll();
+        if(c.equals(b)){
+            assertTrue("Poll ei palauttanut oikeaa arvoa", true);
+        }
+    }
 }

@@ -51,7 +51,7 @@ public class Grid extends JFrame {
     /**
      * initialisointi metodi nodeille.
      *
-     * @param n käsiteltävä node
+     * @param n käsiteltävä node.
      * @param x noden sijainti x koordinaatissa.
      * @param y noden sijainti y koordinaatissa.
      */
@@ -67,10 +67,10 @@ public class Grid extends JFrame {
     }
 
     /**
-     * Haetaan tietty node jostain koordinaatista
+     * Haetaan tietty node jostain koordinaatista.
      *
-     * @param a x koordinaatti
-     * @param b y koordinaatti
+     * @param a x koordinaatti.
+     * @param b y koordinaatti.
      * @return palauttaa noden.
      */
     public static Node getLabelAtCoords(int a, int b) {
@@ -83,9 +83,9 @@ public class Grid extends JFrame {
     }
 
     /**
-     * hakee noden koordinaatit
+     * hakee noden koordinaatit.
      *
-     * @param l node jonka koodinaatit haetaan
+     * @param l node jonka koodinaatit haetaan.
      * @return koordinaatit taulukossa jossa [0] on x koordinaatti ja [1] y
      * koordinaatti.
      */
@@ -102,7 +102,7 @@ public class Grid extends JFrame {
     /**
      * haetaan jonkin noden naapurit 8 suunnassa.
      *
-     * @param current node jonka naapurit haetaan
+     * @param current node jonka naapurit haetaan.
      * @return palautetaan naapurit taulukossa jossa n[0] on ensimmäinen naapuri
      * n[1] toinen .. n[7] viimeinen.
      */
@@ -133,8 +133,8 @@ public class Grid extends JFrame {
      * tarkisteaan onko node tietyssä pisteessä vapaa. tulisi palauttaa false
      * jos node on joko null, tai seinää.
      *
-     * @param x x koordinaatti
-     * @param y y koordinaatti
+     * @param x x koordinaatti.
+     * @param y y koordinaatti.
      * @return boolean arvo, onko node mahdollinen paikka.
      */
     public static boolean passable(int x, int y) {
@@ -164,18 +164,18 @@ public class Grid extends JFrame {
     }
 
     /**
-     * haetaan alkupiste
+     * haetaan alkupiste.
      *
-     * @return palauttaa alkupisteen
+     * @return palauttaa alkupisteen.
      */
     public static Node getStart() {
         return startLabel;
     }
 
     /**
-     * haetaan loppupiste
+     * haetaan loppupiste.
      *
-     * @return palauttaa loppupisteen
+     * @return palauttaa loppupisteen.
      */
     public static Node getEnd() {
         return endLabel;
@@ -228,7 +228,7 @@ public class Grid extends JFrame {
     }
 
     /**
-     * piirretään polku maalista alkuun
+     * piirretään polku maalista alkuun.
      *
      * @param next node josta peruutetaan viiva alkuun.
      */
@@ -250,9 +250,9 @@ public class Grid extends JFrame {
         }
     }
     /**
-     * väritetään nodet
+     * väritetään nodet.
      *
-     * @param next väritettävä node
+     * @param next väritettävä node.
      */
     public static  void colorNodes(Node next) { //maalataan käydyt nodet
         if (next != getEnd() && next != getStart()) {
@@ -263,7 +263,7 @@ public class Grid extends JFrame {
     /**
      * Synkronoidaan labelin arvo varmuuden varalta.
      *
-     * @param n
+     * @param n päivitettävä node.
      */
     public static void updateLabel(Node n) {
         if (n != null) {
